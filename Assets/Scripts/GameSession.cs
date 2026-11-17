@@ -1,0 +1,38 @@
+// What the player picked on the way to a run, and how the last run went.
+// The menu screens read these instead of passing values around.
+public static class GameSession
+{
+    public class Result
+    {
+        public bool won;
+        public int score;
+        public int stars;
+        public int coins;
+        public bool newBest;
+    }
+
+    public static int mode;          // index into GameCatalog.Modes
+    public static int level;         // 0 to 11
+    public static bool freshRun = true;
+    public static Result last = new Result();
+
+    public static string LevelLabel => "Sector " + (level + 1) + "  |  " + GameCatalog.Modes[mode].name;
+
+    public static void NewRun()
+    {
+        freshRun = true;
+    }
+
+    // Called when the player finishes a run. Fewer than 100 points counts as a lost run.
+    public static Result Finish(int score)
+    {
+        var r = new Result();
+        r.score = score;
+        r.stars = GameCatalog.StarsFor(score);
+        r.won = r.stars > 0;
+        r.coins = r.won ? score / 5 + r.stars * 10 : 0;
+        r.newBest = PlayerData.SaveRun(level, score, r.stars, r.coins);
+        last = r;
+        return r;
+    }
+}
