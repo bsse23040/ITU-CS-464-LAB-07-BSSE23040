@@ -13,7 +13,7 @@ public class LoadoutScreen : UIScreen
     [SerializeField] TMP_Text nameText;
     [SerializeField] TMP_Text roleText;
     [SerializeField] Image[] dots;
-    [SerializeField] Image[] statFills;      // Speed, Handling, Boost (filled images)
+    [SerializeField] RectTransform[] statFills;   // Speed, Handling, Boost. Each bar is as wide as its value.
     [SerializeField] Button previous;
     [SerializeField] Button next;
     [SerializeField] SwipeDetector swipe;
@@ -78,10 +78,10 @@ public class LoadoutScreen : UIScreen
         float[] values = { ship.speed, ship.handling, ship.boost };
         for (int i = 0; i < statFills.Length; i++)
         {
-            Image fill = statFills[i];
-            float from = animateStats ? fill.fillAmount : 0f;
+            RectTransform fill = statFills[i];
+            float from = animateStats ? fill.anchorMax.x : 0f;
             float to = values[i];
-            Tween.Value(fill, "fill", 0.5f, Ease.OutCubic, k => fill.fillAmount = Mathf.Lerp(from, to, k), null, 0.1f + i * 0.08f);
+            Tween.Value(fill, "fill", 0.5f, Ease.OutCubic, k => fill.anchorMax = new Vector2(Mathf.Lerp(from, to, k), 1f), null, 0.1f + i * 0.08f);
         }
         RefreshAction();
     }
