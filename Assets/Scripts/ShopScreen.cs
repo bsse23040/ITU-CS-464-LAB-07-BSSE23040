@@ -16,9 +16,14 @@ public class ShopScreen : UIScreen
     [SerializeField] RectTransform[] popItems;
     [SerializeField] int giftCoins = 100;
 
+    Vector2 shipsHome;
+    Vector2 boostsHome;
+
     protected override void Awake()
     {
         base.Awake();
+        shipsHome = ((RectTransform)shipsGroup.transform).anchoredPosition;
+        boostsHome = ((RectTransform)boostsGroup.transform).anchoredPosition;
         tabs.Changed += ShowTab;
         foreach (var item in shipItems) Hook(item);
         foreach (var item in boostItems) Hook(item);
@@ -35,6 +40,8 @@ public class ShopScreen : UIScreen
         tabs.Select(0, false);
         SetTabVisible(shipsGroup, true);
         SetTabVisible(boostsGroup, false);
+        ((RectTransform)shipsGroup.transform).anchoredPosition = shipsHome;
+        ((RectTransform)boostsGroup.transform).anchoredPosition = boostsHome;
         RefreshAll();
         for (int i = 0; i < popItems.Length; i++)
             UIAnim.PopIn(popItems[i], 0.05f + i * 0.07f);
@@ -57,15 +64,17 @@ public class ShopScreen : UIScreen
         var showing = index == 0 ? shipsGroup : boostsGroup;
         var hiding = index == 0 ? boostsGroup : shipsGroup;
         float side = index == 0 ? -1f : 1f;
+        Vector2 showingHome = index == 0 ? shipsHome : boostsHome;
+        Vector2 hidingHome = index == 0 ? boostsHome : shipsHome;
 
-        Tween.Move((RectTransform)hiding.transform, new Vector2(-side * 120f, 0f), 0.2f, Ease.InCubic);
+        Tween.Move((RectTransform)hiding.transform, hidingHome + new Vector2(-side * 120f, 0f), 0.2f, Ease.InCubic);
         Tween.Fade(hiding, 0f, 0.2f, Ease.InCubic, 0f, () => SetTabVisible(hiding, false));
 
         showing.gameObject.SetActive(true);
         SetTabVisible(showing, true);
         showing.alpha = 0f;
-        ((RectTransform)showing.transform).anchoredPosition = new Vector2(side * 120f, 0f);
-        Tween.Move((RectTransform)showing.transform, Vector2.zero, 0.32f, Ease.OutCubic);
+        ((RectTransform)showing.transform).anchoredPosition = showingHome + new Vector2(side * 120f, 0f);
+        Tween.Move((RectTransform)showing.transform, showingHome, 0.32f, Ease.OutCubic);
         Tween.Fade(showing, 1f, 0.25f, Ease.OutQuad);
     }
 
@@ -75,7 +84,6 @@ public class ShopScreen : UIScreen
         group.alpha = visible ? 1f : 0f;
         group.interactable = visible;
         group.blocksRaycasts = visible;
-        ((RectTransform)group.transform).anchoredPosition = Vector2.zero;
     }
 
     void TryBuy(ShopItem item)
