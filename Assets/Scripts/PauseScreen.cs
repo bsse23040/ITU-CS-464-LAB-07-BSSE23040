@@ -47,14 +47,14 @@ public class PauseScreen : UIScreen
     void Resume()
     {
         Time.timeScale = 1f;
-        ScreenManager.Instance.Back();
+        ScreenManager.Instance.GoBack();
     }
 
     void Restart()
     {
         Time.timeScale = 1f;
         gameplay.StartRun();
-        ScreenManager.Instance.Back();
+        ScreenManager.Instance.GoBack();
     }
 
     void Quit()

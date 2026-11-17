@@ -78,13 +78,24 @@ public class ScreenManager : MonoBehaviour
     {
         if (busy) return;
         history.Clear();
+        // the main menu always has the title behind it, so Back there still goes somewhere
+        if (id == ScreenId.MainMenu) history.Push(ScreenId.Title);
         Show(id, true);
     }
 
+    // the back arrow and the Escape key: the current screen gets the first say
     public void Back()
     {
         if (busy) return;
         if (Get(current).HandleBack()) return;
+        GoBack();
+    }
+
+    // goes back along the history without asking the screen. A screen that handles Back itself
+    // (the pause menu, to resume) uses this, otherwise it would ask itself again and again.
+    public void GoBack()
+    {
+        if (busy) return;
         if (history.Count == 0) return;
         Show(history.Pop(), false);
     }
