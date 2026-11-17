@@ -13,6 +13,8 @@ public class ToggleSwitch : MonoBehaviour
     [SerializeField] TMP_Text stateText;
     [SerializeField] Color onColor = Color.green;
     [SerializeField] Color offColor = Color.gray;
+    [SerializeField] Color onTextColor = Color.black;     // dark on the bright ON track
+    [SerializeField] Color offTextColor = Color.white;    // light on the dim OFF track
     [SerializeField] float travel = 54f;
 
     public event Action<bool> Toggled;
@@ -45,6 +47,7 @@ public class ToggleSwitch : MonoBehaviour
         }
 
         stateText.text = on ? "ON" : "OFF";
+        stateText.color = on ? onTextColor : offTextColor;
         stateText.alignment = on ? TextAlignmentOptions.MidlineLeft : TextAlignmentOptions.MidlineRight;
     }
 }
