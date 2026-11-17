@@ -14,6 +14,7 @@ public static class GameSession
     public static int mode;          // index into GameCatalog.Modes
     public static int level;         // 0 to 11
     public static bool freshRun = true;
+    public static int loadoutView = -1;   // the ship the loadout was showing when it sent the player to the shop
     public static Result last = new Result();
 
     public static string LevelLabel => "Sector " + (level + 1) + "  ·  " + GameCatalog.Modes[mode].name;

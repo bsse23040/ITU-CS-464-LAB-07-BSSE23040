@@ -38,7 +38,9 @@ public class LoadoutScreen : UIScreen
 
     public override void OnOpen()
     {
-        viewing = PlayerData.EquippedShip;
+        // coming back from the shop, show the ship that was being looked at, not the equipped one
+        viewing = GameSession.loadoutView >= 0 ? GameSession.loadoutView : PlayerData.EquippedShip;
+        GameSession.loadoutView = -1;
         moving = false;
         Show(false);
         for (int i = 0; i < popItems.Length; i++)
@@ -120,6 +122,7 @@ public class LoadoutScreen : UIScreen
         }
         else
         {
+            GameSession.loadoutView = viewing;
             ScreenManager.Instance.Open(ScreenId.Shop);
         }
     }
