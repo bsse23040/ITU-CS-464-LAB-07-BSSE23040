@@ -71,19 +71,21 @@ public static class Tween
 
     public static void Value(object owner, string slot, float seconds, Ease ease, Action<float> update, Action done = null, float delay = 0f)
     {
+        var host = Host;   // make sure the runner exists before this tween is registered
         var key = (owner, slot);
         int id = ++counter;
         serials[key] = id;
-        Host.StartCoroutine(Play(key, id, seconds, ease, update, done, delay, false));
+        host.StartCoroutine(Play(key, id, seconds, ease, update, done, delay, false));
     }
 
     // goes there and back again until something else cancels it
     public static void Loop(object owner, string slot, float seconds, Ease ease, Action<float> update)
     {
+        var host = Host;
         var key = (owner, slot);
         int id = ++counter;
         serials[key] = id;
-        Host.StartCoroutine(Play(key, id, seconds, ease, update, null, 0f, true));
+        host.StartCoroutine(Play(key, id, seconds, ease, update, null, 0f, true));
     }
 
     public static void Cancel(object owner, string slot)
