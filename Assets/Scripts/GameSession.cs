@@ -16,7 +16,7 @@ public static class GameSession
     public static bool freshRun = true;
     public static Result last = new Result();
 
-    public static string LevelLabel => "Sector " + (level + 1) + "  |  " + GameCatalog.Modes[mode].name;
+    public static string LevelLabel => "Sector " + (level + 1) + "  ·  " + GameCatalog.Modes[mode].name;
 
     public static void NewRun()
     {

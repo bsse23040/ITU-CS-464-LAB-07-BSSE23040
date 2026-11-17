@@ -22,7 +22,6 @@ public class ResultsScreen : UIScreen
     [SerializeField] RectTransform buttonArea;
     [SerializeField] StyledButton primary;
     [SerializeField] StyledButton left;
-    [SerializeField] Button menu;
 
     Vector2 titleHome;
     Vector2 buttonHome;
@@ -47,7 +46,7 @@ public class ResultsScreen : UIScreen
         bool lastLevel = GameSession.level >= PlayerData.LevelCount - 1;
         primary.SetLabel(won ? (lastLevel ? "PLAY AGAIN" : "NEXT SECTOR") : "TRY AGAIN");
         left.SetLabel(won ? "RETRY" : "LOADOUT");
-        bestText.text = r.newBest ? "New best!" : "Best  " + PlayerData.BestScore(GameSession.level);
+        bestText.text = "Best  " + PlayerData.BestScore(GameSession.level);
 
         // start from empty, then play it in
         scoreText.text = "0";
