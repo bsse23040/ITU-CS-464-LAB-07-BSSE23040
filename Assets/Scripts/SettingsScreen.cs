@@ -2,14 +2,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-// Sound, vibration, notifications and graphics quality. Every change is saved straight away,
+// Steering, vibration, notifications and graphics quality. Every change is saved straight away,
 // there is no "apply" button to forget. Resetting progress needs two taps so it cannot happen by accident.
 public class SettingsScreen : UIScreen
 {
-    [SerializeField] Slider music;
-    [SerializeField] Slider sfx;
-    [SerializeField] TMP_Text musicValue;
-    [SerializeField] TMP_Text sfxValue;
+    [SerializeField] Slider steering;
+    [SerializeField] TMP_Text steeringValue;
     [SerializeField] ToggleSwitch vibration;
     [SerializeField] ToggleSwitch notifications;
     [SerializeField] SegmentedControl quality;
@@ -23,16 +21,10 @@ public class SettingsScreen : UIScreen
     protected override void Awake()
     {
         base.Awake();
-        music.onValueChanged.AddListener(v =>
+        steering.onValueChanged.AddListener(v =>
         {
-            PlayerData.Music = v;
-            musicValue.text = Mathf.RoundToInt(v * 100f) + "%";
-            UISound.Refresh();
-        });
-        sfx.onValueChanged.AddListener(v =>
-        {
-            PlayerData.Sfx = v;
-            sfxValue.text = Mathf.RoundToInt(v * 100f) + "%";
+            PlayerData.Steering = v;
+            steeringValue.text = Mathf.RoundToInt(v * 100f) + "%";
         });
         vibration.Toggled += on =>
         {
@@ -59,10 +51,8 @@ public class SettingsScreen : UIScreen
     // put the controls on the saved values without firing the change events
     void Load()
     {
-        music.SetValueWithoutNotify(PlayerData.Music);
-        sfx.SetValueWithoutNotify(PlayerData.Sfx);
-        musicValue.text = Mathf.RoundToInt(PlayerData.Music * 100f) + "%";
-        sfxValue.text = Mathf.RoundToInt(PlayerData.Sfx * 100f) + "%";
+        steering.SetValueWithoutNotify(PlayerData.Steering);
+        steeringValue.text = Mathf.RoundToInt(PlayerData.Steering * 100f) + "%";
         vibration.Set(PlayerData.Vibration, false);
         notifications.Set(PlayerData.Notifications, false);
         quality.Select(Mathf.Clamp(PlayerData.Quality, 0, 2), false);

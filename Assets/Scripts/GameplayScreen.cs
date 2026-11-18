@@ -80,7 +80,9 @@ public class GameplayScreen : UIScreen
             targetX = Mathf.Clamp(local.x, -halfWidth, halfWidth);
         }
         Vector2 p = ship.anchoredPosition;
-        float newX = Mathf.Lerp(p.x, targetX, 1f - Mathf.Exp(-10f * dt));
+        // the Steering setting decides how quickly the ship follows the finger
+        float follow = Mathf.Lerp(5f, 18f, PlayerData.Steering);
+        float newX = Mathf.Lerp(p.x, targetX, 1f - Mathf.Exp(-follow * dt));
         ship.anchoredPosition = new Vector2(newX, p.y);
         ship.localRotation = Quaternion.Euler(0f, 0f, Mathf.Clamp((p.x - targetX) * 0.06f, -14f, 14f));
 

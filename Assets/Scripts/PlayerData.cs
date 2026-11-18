@@ -16,8 +16,7 @@ public static class PlayerData
         public int[] boosts = { 1, 0, 2, 0 };
         public int[] stars = { 3, 3, 2, 3, 1, 0, 0, 0, 0, 0, 0, 0 };
         public int[] bestScores = { 520, 455, 310, 470, 140, 0, 0, 0, 0, 0, 0, 0 };
-        public float music = 0.6f;
-        public float sfx = 0.8f;
+        public float steering = 0.5f;
         public bool vibration = true;
         public bool notifications = true;
         public int quality = 1;
@@ -144,8 +143,7 @@ public static class PlayerData
     }
 
     // ---- settings ----
-    public static float Music { get => D.music; set { D.music = value; Commit(); } }
-    public static float Sfx { get => D.sfx; set { D.sfx = value; Commit(); } }
+    public static float Steering { get => D.steering; set { D.steering = value; Commit(); } }
     public static bool Vibration { get => D.vibration; set { D.vibration = value; Commit(); } }
     public static bool Notifications { get => D.notifications; set { D.notifications = value; Commit(); } }
     public static int Quality { get => D.quality; set { D.quality = value; Commit(); } }
