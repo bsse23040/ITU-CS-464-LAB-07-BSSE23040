@@ -362,7 +362,7 @@ I wrote an editor script (not in the repo) that opens the scene in play mode and
 - **Art:** every sprite (rounded boxes, icons, ships, planet, comet, rocks) is drawn by my own code in an editor script, with signed distance shapes. No AI-generated images, no downloaded art, no asset store packages.
 - **Sound:** the blip and the music pad are made in code at runtime (`UISound.cs`).
 - **Easing curves:** the formulas are the usual ones listed on [easings.net](https://easings.net) (Robert Penner's easing equations). The tween code around them is mine.
-- **Inspiration only:** the calm one-thumb mood of *Alto's Odyssey* and the card-style shops and level maps of mobile runners like *Subway Surfers*. I did not take any asset or code from them.
+- **Inspiration only:** the lobby, loadout and shop style of *PUBG MOBILE* (a dark screen with one bright main button, a ship or character to look at, and a currency bar) and the one-thumb runner menus of *Subway Surfers* (bright cards, a level map, a results screen with a count-up). I did not take any asset or code from either game, and the colours, icons and layouts are my own.
 - **Course:** ITU CS-464 Game Development lecture notes on colour, type, hierarchy and motion.
 
 ## Folders
