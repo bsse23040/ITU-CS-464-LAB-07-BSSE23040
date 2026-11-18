@@ -328,7 +328,7 @@ I wrote an editor script (it is not in the repo) that opens the scene in play mo
 ## Credits and references
 
 - Font: [Inter](https://github.com/rsms/inter) by Rasmus Andersson and the Inter Project Authors, SIL Open Font License 1.1. I used the copy that comes with the Unity editor. The license text is in `Assets/Fonts/Inter-LICENSE.txt`.
-- Engine and packages: Unity 6000.6.2f1, uGUI and TextMesh Pro.
+- Engine and packages: Unity 6000.6.2f1, the Universal Render Pipeline (URP), uGUI and TextMesh Pro.
 - Art: every sprite (rounded boxes, icons, ships, planet, comet, rocks) is drawn by my own code in an editor script. There are no AI-generated images, no downloaded art and no asset store packages.
 - Easing curves: the formulas are the usual ones from [easings.net](https://easings.net) (Robert Penner's easing equations). The tween code around them is mine.
 - Inspiration only: the lobby, loadout and shop style of PUBG MOBILE (a dark screen with one bright main button, a ship or character to look at, and a currency bar) and the one-thumb runner menus of Subway Surfers (bright cards, a level map, a results screen with a count-up). I took no assets or code from either game, and the colours, icons and layouts are my own.
